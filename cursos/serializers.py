@@ -22,7 +22,7 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
         }
 
 
-class CursoSerializer(serializers, ModelSerializer):
+class CursoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model: Curso
