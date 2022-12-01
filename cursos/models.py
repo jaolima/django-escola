@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Base(models.Model):
     criacao = models.DateTimeField(auto_now_add=True)
     atualizacao = models.DateTimeField(auto_now=True)
@@ -8,6 +9,7 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
+
 class Curso(Base):
     titulo = models.CharField(max_length=255)
     url = models.URLField(unique=True)
@@ -15,9 +17,11 @@ class Curso(Base):
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
+        ordering = ['id']
 
     def __str__(self):
-       return self.titulo
+        return self.titulo
+
 
 class Avaliacao(Base):
     curso = models.ForeignKey(Curso, related_name='avaliacoes', on_delete=models.CASCADE)
@@ -31,6 +35,7 @@ class Avaliacao(Base):
         verbose_name_plural = 'Avaliações'
         # A linha abaixo serve para restringir que um email avalie somente um único curso
         unique_together = ['email', 'curso']
+        ordering = ['id']
 
         def __str__(self):
             return f'{self.nome} avaliou o curso {self.curso} com a nota {self.avaliacao}'
